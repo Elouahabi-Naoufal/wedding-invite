@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>زكريا و بثينة</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div id="envelope">
+  <div class="env-card">
+    <div class="env-top">دعوة زفاف</div>
+    <div id="seal" title="اضغط لفتح الدعوة">💍</div>
+    <p class="env-hint">اضغط على الخاتم لفتح الدعوة</p>
+  </div>
+</div>
+
+<main id="invite" hidden>
+  <section class="ayah">
+    <p class="ayah-text">﴿ {{ w.ayah }} ﴾</p>
+    <p class="ayah-surah">{{ w.surah }}</p>
+  </section>
+
+  <section class="names">
+    <h1>{{ w.groom }} <span>&</span> {{ w.bride }}</h1>
+    <p class="mashiaa">و ذلك بمشيئة الله</p>
+    <p class="date-ar">{{ w.date_ar }}</p>
+  </section>
+
+  <section class="countdown">
+    <h2>العد التنازلي</h2>
+    <div class="cd-grid">
+      <div><span id="cd-days">--</span><small>يوم</small></div>
+      <div><span id="cd-hours">--</span><small>ساعة</small></div>
+      <div><span id="cd-mins">--</span><small>دقيقة</small></div>
+      <div><span id="cd-secs">--</span><small>ثانية</small></div>
+    </div>
+  </section>
+
+  <section class="details">
+    <h2>{{ w.day_title }}</h2>
+    <p class="location">{{ w.location }}</p>
+    <a class="maps-btn" href="{{ w.maps_url }}" target="_blank" rel="noopener">📍 فتح الموقع في الخرائط</a>
+  </section>
+
+  <section class="program">
+    <h2>برنامج اليوم</h2>
+    <ul>
+      {% for p in w.program %}
+      <li>
+        <span class="p-icon">{{ p.icon }}</span>
+        <span class="p-activity">{{ p.activity }}</span>
+        <span class="p-time">{{ p.time }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="rsvp">
+    <h2>تأكيد الحضور</h2>
+    <form id="rsvp-form">
+      <label>الاسم الكامل
+        <input name="guest_name" required>
+      </label>
+      <label>هل ستحضر؟
+        <select name="attending">
+          <option value="true">نعم</option>
+          <option value="false">لا</option>
+        </select>
+      </label>
+      <label>هل سيرافقك شخص؟
+        <select name="companion">
+          <option value="false">لا</option>
+          <option value="true">نعم</option>
+        </select>
+      </label>
+      <label>عدد المقاعد
+        <input type="number" name="seats" min="1" max="20" value="1">
+      </label>
+      <button type="submit">إرسال</button>
+      <p id="rsvp-msg"></p>
+    </form>
+  </section>
+
+  <footer>بكل الحب ندعوكم لمشاركتنا فرحتنا</footer>
+</main>
+
+<audio id="ayah-audio" src="/static/ayah.mp3" loop></audio>
+<button id="audio-toggle" hidden>🔊</button>
+
+<script>
+  window.WEDDING_DATE = "{{ w.date }}";
+</script>
+<script src="/static/script.js"></script>
+</body>
+</html>
