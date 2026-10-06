@@ -58,8 +58,6 @@
         attending: data.get('attending'),
         companion: data.get('companion'),
         seats: data.get('seats'),
-        transport: data.get('transport'),
-        dietary: data.get('dietary'),
         message: data.get('message'),
       }),
     });
