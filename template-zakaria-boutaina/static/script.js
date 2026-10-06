@@ -38,11 +38,6 @@
   }
   tick(); setInterval(tick, 1000);
 
-  document.getElementById('copy-rib').addEventListener('click', async () => {
-    await navigator.clipboard.writeText(document.getElementById('rib').textContent.trim());
-    document.getElementById('copy-rib').textContent = 'تم النسخ ✓';
-  });
-
   const wa = document.getElementById('wa-share');
   wa.href = 'https://wa.me/?text=' + encodeURIComponent(location.href);
 
