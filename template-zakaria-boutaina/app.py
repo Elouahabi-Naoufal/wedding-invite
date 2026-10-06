@@ -1,7 +1,8 @@
 import os
 from datetime import datetime, timezone
+from functools import wraps
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -62,8 +63,24 @@ def rsvp():
     return jsonify({"ok": True})
 
 
+ADMIN_KEY = os.environ.get("ADMIN_KEY", "admin123")
+
+
+def require_admin():
+    key = request.args.get("key") or request.headers.get("X-Admin-Key")
+    if key != ADMIN_KEY:
+        abort(401)
+
+
+@app.route("/admin")
+def admin():
+    require_admin()
+    return render_template("admin.html")
+
+
 @app.route("/api/responses")
 def responses():
+    require_admin()
     rows = Rsvp.query.order_by(Rsvp.created_at.desc()).all()
     yes = sum(1 for r in rows if r.attending)
     no = sum(1 for r in rows if not r.attending)

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم - زكريا و بثينة</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body { background: #faf5e9; color: #1f2a24; font-family: 'Tajawal'; margin: 0; padding: 30px 15px; }
+  h1 { font-family: 'Aref Ruqaa'; color: #0f3d2e; text-align: center; }
+  .cards { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 24px 0; }
+  .card { background: #0f3d2e; color: #f5ead0; border-radius: 12px; padding: 20px 30px; min-width: 120px; text-align: center; }
+  .card .n { font-size: 2rem; font-weight: 700; display: block; }
+  .card .l { color: #c9a227; }
+  table { width: 100%; max-width: 800px; margin: 0 auto; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; }
+  th, td { padding: 12px 14px; text-align: right; border-bottom: 1px solid #eadfc3; }
+  th { background: #14513b; color: #f5ead0; }
+  .yes { color: #0f7a3d; font-weight: 700; }
+  .no { color: #b03030; font-weight: 700; }
+  button { display: block; margin: 20px auto; background: #c9a227; color: #fff; border: none; border-radius: 30px; padding: 10px 26px; font-weight: 700; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>ردود الضيوف — زكريا و بثينة</h1>
+<div class="cards">
+  <div class="card"><span class="n" id="yes">--</span><span class="l">حاضرون</span></div>
+  <div class="card"><span class="n" id="no">--</span><span class="l">معتذرون</span></div>
+  <div class="card"><span class="n" id="seats">--</span><span class="l">مقاعد مؤكدة</span></div>
+</div>
+<table>
+  <thead><tr><th>الاسم</th><th>الحضور</th><th>مرافق</th><th>المقاعد</th><th>التاريخ</th></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+<button id="refresh">تحديث</button>
+<script>
+const key = new URLSearchParams(location.search).get('key') || '';
+async function load() {
+  const r = await fetch('/api/responses?key=' + encodeURIComponent(key));
+  if (!r.ok) { document.getElementById('rows').innerHTML = '<tr><td colspan="5">غير مصرح</td></tr>'; return; }
+  const d = await r.json();
+  document.getElementById('yes').textContent = d.yes;
+  document.getElementById('no').textContent = d.no;
+  let total = 0;
+  document.getElementById('rows').innerHTML = d.guests.map(g => {
+    if (g.attending) total += g.seats;
+    return `<tr>
+      <td>${g.name}</td>
+      <td class="${g.attending ? 'yes' : 'no'}">${g.attending ? 'حاضر' : 'معتذر'}</td>
+      <td>${g.companion ? 'نعم' : 'لا'}</td>
+      <td>${g.seats}</td>
+      <td>${new Date(g.created_at).toLocaleString('ar-MA')}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seats').textContent = total;
+}
+document.getElementById('refresh').addEventListener('click', load);
+load();
+</script>
+</body>
+</html>

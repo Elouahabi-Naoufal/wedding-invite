@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/wedding
+      ADMIN_KEY: admin123
     depends_on:
       - db
     restart: always
