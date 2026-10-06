@@ -4,6 +4,7 @@ from functools import wraps
 
 from flask import Flask, jsonify, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
@@ -19,6 +20,9 @@ class Rsvp(db.Model):
     attending = db.Column(db.Boolean, nullable=False)
     companion = db.Column(db.Boolean, default=False)
     seats = db.Column(db.Integer, default=1)
+    transport = db.Column(db.String(50), default="")
+    dietary = db.Column(db.Text, default="")
+    message = db.Column(db.Text, default="")
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
@@ -57,7 +61,10 @@ def rsvp():
         seats = max(1, int(data.get("seats", 1)))
     except (TypeError, ValueError):
         seats = 1
-    row = Rsvp(guest_name=name, attending=attending, companion=companion, seats=seats)
+    row = Rsvp(guest_name=name, attending=attending, companion=companion, seats=seats,
+               transport=(data.get("transport") or "").strip(),
+               dietary=(data.get("dietary") or "").strip(),
+               message=(data.get("message") or "").strip())
     db.session.add(row)
     db.session.commit()
     return jsonify({"ok": True})
@@ -93,6 +100,9 @@ def responses():
                 "attending": r.attending,
                 "companion": r.companion,
                 "seats": r.seats,
+                "transport": r.transport,
+                "dietary": r.dietary,
+                "message": r.message,
                 "created_at": r.created_at.isoformat(),
             }
             for r in rows
@@ -102,6 +112,12 @@ def responses():
 
 with app.app_context():
     db.create_all()
+    for col, ddl in [("transport", "VARCHAR(50) DEFAULT ''"), ("dietary", "TEXT DEFAULT ''"), ("message", "TEXT DEFAULT ''")]:
+        try:
+            db.session.execute(text(f"ALTER TABLE rsvp ADD COLUMN {col} {ddl}"))
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

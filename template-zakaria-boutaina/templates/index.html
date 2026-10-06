@@ -11,6 +11,7 @@
 
 <div id="envelope">
   <div class="env-card">
+    <div class="monogram">ز &amp; ب</div>
     <div class="env-top">دعوة زفاف</div>
     <div id="seal" title="اضغط لفتح الدعوة">💍</div>
     <p class="env-hint">اضغط على الخاتم لفتح الدعوة</p>
@@ -22,6 +23,8 @@
     <p class="ayah-text">﴿ {{ w.ayah }} ﴾</p>
     <p class="ayah-surah">{{ w.surah }}</p>
   </section>
+
+  <div class="divider">❦</div>
 
   <section class="names">
     <h1>{{ w.groom }} <span>&</span> {{ w.bride }}</h1>
@@ -38,6 +41,8 @@
       <div><span id="cd-secs">--</span><small>ثانية</small></div>
     </div>
   </section>
+
+  <div class="divider">❦</div>
 
   <section class="details">
     <h2>{{ w.day_title }}</h2>
@@ -57,6 +62,29 @@
       {% endfor %}
     </ul>
   </section>
+
+  <div class="divider">❦</div>
+
+  <section class="dresscode">
+    <h2>اللباس</h2>
+    <p>رسمي أنيق — اللون الأبيض للعروس فقط</p>
+  </section>
+
+  <section class="gifts">
+    <h2>هدية العرس</h2>
+    <p>مبروك للعروسين — يمكنك إرسال هديتك نقداً عبر الحساب التالي:</p>
+    <p class="rib" id="rib">MA00 0000 0000 0000 0000 0000 000</p>
+    <button class="copy-btn" id="copy-rib">نسخ الحساب</button>
+  </section>
+
+  <section class="faq">
+    <h2>أسئلة شائعة</h2>
+    <details><summary>هل يُسمح بالأطفال؟</summary>نرحب بحضور الأطفال مع العائلة.</details>
+    <details><summary>هل يتوفر موقف سيارات؟</summary>نعم، يتوفر موقف مجاني في المكان.</details>
+    <details><summary>ماذا عن النقل؟</summary>يمكنكم اختيار الحاجة للنقل من نموذج التأكيد.</details>
+  </section>
+
+  <div class="divider">❦</div>
 
   <section class="rsvp">
     <h2>تأكيد الحضور</h2>
@@ -79,10 +107,25 @@
       <label>عدد المقاعد
         <input type="number" name="seats" min="1" max="20" value="1">
       </label>
+      <label>هل تحتاج نقل؟
+        <select name="transport">
+          <option value="">لا</option>
+          <option value="يحتاج">نعم، أحتاج نقل</option>
+          <option value="سيوصل بنفسه">لا، سأصل بنفسي</option>
+        </select>
+      </label>
+      <label>تفضيل الوجبة / حساسية غذائية
+        <input name="dietary" placeholder="مثال: حساسية من المكسرات...">
+      </label>
+      <label>رسالة للعروسين
+        <textarea name="message" rows="3"></textarea>
+      </label>
       <button type="submit">إرسال</button>
       <p id="rsvp-msg"></p>
     </form>
   </section>
+
+  <a class="wa-btn" id="wa-share" target="_blank" rel="noopener">📲 شارك الدعوة عبر واتساب</a>
 
   <footer>بكل الحب ندعوكم لمشاركتنا فرحتنا</footer>
 </main>

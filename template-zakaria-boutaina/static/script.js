@@ -38,6 +38,14 @@
   }
   tick(); setInterval(tick, 1000);
 
+  document.getElementById('copy-rib').addEventListener('click', async () => {
+    await navigator.clipboard.writeText(document.getElementById('rib').textContent.trim());
+    document.getElementById('copy-rib').textContent = 'تم النسخ ✓';
+  });
+
+  const wa = document.getElementById('wa-share');
+  wa.href = 'https://wa.me/?text=' + encodeURIComponent(location.href);
+
   const form = document.getElementById('rsvp-form');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -50,6 +58,9 @@
         attending: data.get('attending'),
         companion: data.get('companion'),
         seats: data.get('seats'),
+        transport: data.get('transport'),
+        dietary: data.get('dietary'),
+        message: data.get('message'),
       }),
     });
     const msg = document.getElementById('rsvp-msg');

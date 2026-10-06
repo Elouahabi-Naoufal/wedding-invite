@@ -28,7 +28,7 @@
   <div class="card"><span class="n" id="seats">--</span><span class="l">مقاعد مؤكدة</span></div>
 </div>
 <table>
-  <thead><tr><th>الاسم</th><th>الحضور</th><th>مرافق</th><th>المقاعد</th><th>التاريخ</th></tr></thead>
+  <thead><tr><th>الاسم</th><th>الحضور</th><th>مرافق</th><th>المقاعد</th><th>نقل</th><th>غذائي</th><th>رسالة</th><th>التاريخ</th></tr></thead>
   <tbody id="rows"></tbody>
 </table>
 <button id="refresh">تحديث</button>
@@ -48,6 +48,9 @@ async function load() {
       <td class="${g.attending ? 'yes' : 'no'}">${g.attending ? 'حاضر' : 'معتذر'}</td>
       <td>${g.companion ? 'نعم' : 'لا'}</td>
       <td>${g.seats}</td>
+      <td>${g.transport || '—'}</td>
+      <td>${g.dietary || '—'}</td>
+      <td>${g.message || '—'}</td>
       <td>${new Date(g.created_at).toLocaleString('ar-MA')}</td>
     </tr>`;
   }).join('');
