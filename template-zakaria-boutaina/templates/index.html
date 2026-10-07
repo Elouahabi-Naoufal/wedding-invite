@@ -5,35 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>زكريا و بثينة</title>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/style.css?v=5">
+<link rel="stylesheet" href="/static/style.css?v=6">
 </head>
 <body>
 
+<!-- Envelope Opening -->
 <div id="envelope">
+  <div class="envelope-bg"></div>
   <div class="letter">
     <p class="basmallah">بسم الله الرحمن الرحيم</p>
     <div class="letter-paper">
+      <svg class="corner-ornament top-right" viewBox="0 0 100 100">
+        <path d="M50,5 Q75,5 95,25 Q95,50 75,70 Q50,70 30,50 Q30,25 50,5 Z" fill="none" stroke="#D7A29A" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="8" fill="#D7A29A" opacity="0.3"/>
+      </svg>
+      <svg class="corner-ornament top-left" viewBox="0 0 100 100">
+        <path d="M50,5 Q75,5 95,25 Q95,50 75,70 Q50,70 30,50 Q30,25 50,5 Z" fill="none" stroke="#D7A29A" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="8" fill="#D7A29A" opacity="0.3"/>
+      </svg>
       <div class="env-top">دعوة زفاف</div>
-      <div id="seal" title="اضغط لفتح الدعوة"><span>۞</span></div>
+      <div id="seal" title="اضغط لفتح الدعوة">
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <defs>
+            <radialGradient id="sealGrad" cx="35%" cy="30%">
+              <stop offset="0%" style="stop-color:#F6CFC8"/>
+              <stop offset="100%" style="stop-color:#D7A29A"/>
+            </radialGradient>
+          </defs>
+          <circle cx="50" cy="50" r="45" fill="url(#sealGrad)"/>
+          <path d="M50,20 L55,35 L70,35 L58,45 L63,60 L50,50 L37,60 L42,45 L30,35 L45,35 Z" fill="#FFFAFA" opacity="0.9"/>
+        </svg>
+      </div>
       <p class="env-hint">اضغط على الختم لفتح الدعوة</p>
     </div>
   </div>
 </div>
 
 <main id="invite" hidden>
-  <section class="ayah">
-    <p class="ayah-text">﴿ {{ w.ayah }} ﴾</p>
-    <p class="ayah-surah">{{ w.surah }}</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <svg class="lantern left" viewBox="0 0 100 200">
+      <defs>
+        <linearGradient id="lanternGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#D7A29A"/>
+          <stop offset="100%" style="stop-color:#969988"/>
+        </linearGradient>
+      </defs>
+      <rect x="35" y="10" width="30" height="8" fill="#787A62"/>
+      <path d="M40,18 L60,18 L65,40 L65,140 L60,160 L40,160 L35,140 L35,40 Z" fill="url(#lanternGrad)" opacity="0.8"/>
+      <rect x="42" y="50" width="16" height="80" fill="#FFFAFA" opacity="0.3"/>
+      <circle cx="50" cy="90" r="8" fill="#FFFAFA" opacity="0.6"/>
+    </svg>
+    <div class="hero-content">
+      <svg class="ornament" viewBox="0 0 200 50">
+        <path d="M10,25 Q50,10 100,25 Q150,40 190,25" fill="none" stroke="#D7A29A" stroke-width="2"/>
+        <circle cx="100" cy="25" r="5" fill="#D7A29A"/>
+      </svg>
+      <p class="ayah-text">﴿ {{ w.ayah }} ﴾</p>
+      <p class="ayah-surah">{{ w.surah }}</p>
+      <svg class="ornament" viewBox="0 0 200 50">
+        <path d="M10,25 Q50,40 100,25 Q150,10 190,25" fill="none" stroke="#D7A29A" stroke-width="2"/>
+        <circle cx="100" cy="25" r="5" fill="#D7A29A"/>
+      </svg>
+    </div>
+    <svg class="lantern right" viewBox="0 0 100 200">
+      <rect x="35" y="10" width="30" height="8" fill="#787A62"/>
+      <path d="M40,18 L60,18 L65,40 L65,140 L60,160 L40,160 L35,140 L35,40 Z" fill="url(#lanternGrad)" opacity="0.8"/>
+      <rect x="42" y="50" width="16" height="80" fill="#FFFAFA" opacity="0.3"/>
+      <circle cx="50" cy="90" r="8" fill="#FFFAFA" opacity="0.6"/>
+    </svg>
   </section>
 
-  <div class="divider">❦</div>
-
+  <!-- Names Section -->
   <section class="names">
-    <h1>{{ w.groom }} <span>&</span> {{ w.bride }}</h1>
-    <p class="mashiaa">و ذلك بمشيئة الله</p>
-    <p class="date-ar">{{ w.date_ar }}</p>
+    <div class="names-frame">
+      <svg class="frame-corner tl" viewBox="0 0 50 50">
+        <path d="M5,5 L45,5 L45,15 L15,15 L15,45 L5,45 Z" fill="#D7A29A"/>
+      </svg>
+      <svg class="frame-corner tr" viewBox="0 0 50 50">
+        <path d="M5,5 L45,5 L45,45 L35,45 L35,15 L5,15 Z" fill="#D7A29A"/>
+      </svg>
+      <svg class="frame-corner bl" viewBox="0 0 50 50">
+        <path d="M5,5 L15,5 L15,35 L45,35 L45,45 L5,45 Z" fill="#D7A29A"/>
+      </svg>
+      <svg class="frame-corner br" viewBox="0 0 50 50">
+        <path d="M35,5 L45,5 L45,45 L5,45 L5,35 L35,35 Z" fill="#D7A29A"/>
+      </svg>
+      <h1>{{ w.groom }} <span>&</span> {{ w.bride }}</h1>
+      <p class="mashiaa">و ذلك بمشيئة الله</p>
+      <p class="date-ar">{{ w.date_ar }}</p>
+    </div>
   </section>
 
+  <!-- Countdown -->
   <section class="countdown">
     <h2>العد التنازلي</h2>
     <div class="cd-grid">
@@ -44,14 +108,39 @@
     </div>
   </section>
 
-  <div class="divider">❦</div>
+  <!-- Decorative Divider -->
+  <div class="zellige-divider">
+    <svg viewBox="0 0 400 60">
+      <defs>
+        <pattern id="zellige" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <rect width="40" height="40" fill="none"/>
+          <path d="M20,0 L40,20 L20,40 L0,20 Z" fill="none" stroke="#D7A29A" stroke-width="1"/>
+          <circle cx="20" cy="20" r="3" fill="#969988"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="60" fill="url(#zellige)"/>
+    </svg>
+  </div>
 
+  <!-- Details -->
   <section class="details">
     <h2>{{ w.day_title }}</h2>
-    <p class="location">{{ w.location }}</p>
-    <a class="maps-btn" href="{{ w.maps_url }}" target="_blank" rel="noopener">📍 فتح الموقع في الخرائط</a>
+    <div class="location-card">
+      <svg class="location-icon" viewBox="0 0 50 50">
+        <path d="M25,5 C15,5 10,15 10,22 C10,35 25,45 25,45 C25,45 40,35 40,22 C40,15 35,5 25,5 Z" fill="#D7A29A"/>
+        <circle cx="25" cy="22" r="6" fill="#FFFAFA"/>
+      </svg>
+      <p class="location">{{ w.location }}</p>
+      <a class="maps-btn" href="{{ w.maps_url }}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path d="M12,2C8.13,2 5,5.13 5,9c0,5.25 7,13 7,13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0,9.5a2.5,2.5 0 0,1 0-5 2.5,2.5 0 0,1 0,5z" fill="#FFFAFA"/>
+        </svg>
+        فتح الموقع في الخرائط
+      </a>
+    </div>
   </section>
 
+  <!-- Program -->
   <section class="program">
     <h2>برنامج اليوم</h2>
     <ul>
@@ -65,8 +154,7 @@
     </ul>
   </section>
 
-  <div class="divider">❦</div>
-
+  <!-- RSVP -->
   <section class="rsvp">
     <h2>تأكيد الحضور</h2>
     <form id="rsvp-form">
@@ -96,13 +184,27 @@
     </form>
   </section>
 
-  <a class="wa-btn" id="wa-share" target="_blank" rel="noopener">📲 شارك الدعوة عبر واتساب</a>
+  <a class="wa-btn" id="wa-share" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="20" height="20">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#FFFAFA"/>
+    </svg>
+    شارك الدعوة عبر واتساب
+  </a>
 
-  <footer>بكل الحب ندعوكم لمشاركتنا فرحتنا</footer>
+  <footer>
+    <svg class="footer-ornament" viewBox="0 0 200 30">
+      <path d="M0,15 Q50,0 100,15 Q150,30 200,15" fill="none" stroke="#D7A29A" stroke-width="2"/>
+    </svg>
+    بكل الحب ندعوكم لمشاركتنا فرحتنا
+  </footer>
 </main>
 
 <audio id="ayah-audio" src="/static/ayah.mp3" loop></audio>
-<button id="audio-toggle" hidden>🔊</button>
+<button id="audio-toggle" hidden>
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path d="M3,9v6h4l5,5V4L7,9H3z M16.5,12c0-1.77-1.02-3.29-2.5-4.03v8.05C15.48,15.29 16.5,13.77 16.5,12z" fill="#FFFAFA"/>
+  </svg>
+</button>
 
 <script>
   window.WEDDING_DATE = "{{ w.date }}";
