@@ -8,14 +8,19 @@
   // Envelope opening
   seal.addEventListener('click', () => {
     audio.play().catch(() => {});
-    envelope.style.opacity = '0';
+    // Add opening animation
+    document.querySelector('.envelope-container').classList.add('opening');
+    // Wait for animation then fade out
     setTimeout(() => {
-      envelope.remove();
-      invite.hidden = false;
-      toggle.hidden = false;
-      // Trigger scroll animations
-      initScrollAnimations();
-    }, 1000);
+      envelope.style.opacity = '0';
+      setTimeout(() => {
+        envelope.remove();
+        invite.hidden = false;
+        toggle.hidden = false;
+        // Trigger scroll animations
+        initScrollAnimations();
+      }, 1000);
+    }, 800);
   });
 
   // Audio toggle
