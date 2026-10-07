@@ -9,7 +9,7 @@
   seal.addEventListener('click', () => {
     audio.play().catch(() => {});
     // Add opening animation
-    document.querySelector('.envelope-container').classList.add('opening');
+    document.querySelector('.envelope').classList.add('opening');
     // Wait for animation then fade out
     setTimeout(() => {
       envelope.style.opacity = '0';
